@@ -99,13 +99,6 @@ def index():
             text =" "
             return render_template("index.html", textarea=text, notes=notes, tags=tags)
 
-        elif request.form['tag-action']:
-
-            tag_name = request.form.get("tag-action")
-            notes = db.execute("SELECT * FROM notes ORDER BY id DESC WHERE tag = ?", tag_name)
-
-            return render_template("index.html", notes=notes, tags=tags)
-
         else:
             return render_template("index.html", notes=notes, tags=tags)
 
