@@ -42,6 +42,7 @@ def index():
         "SELECT tag, COUNT(*) AS number FROM notes GROUP BY tag")
     notes = db.execute("SELECT * FROM notes ORDER BY id DESC")
 
+    # User reached route via POST
     if request.method == "POST":
 
         if request.form['action'] == "New note":
