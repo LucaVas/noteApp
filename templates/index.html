@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Note taking app
+{% endblock %}
+
+{% block body %}
+
+    <nav class="navbar">
+        <div class="nav_views">
+            <div class="views_top">
+                <h3>Views</h3>
+                <button>+</button>
+            </div>
+
+            <nav class="views_nav">
+                <ul>
+                    <li class="nav-view-item"><a href="#">All notes</a></li>
+                    <li class="nav-view-item"><a href="#">Archive</a></li>
+                    <li class="nav-view-item"><a href="#">Trash</a></li>
+                </ul>
+            </nav>
+        </div>
+        <nav class="nav_tags">
+            <h3 id="tag-list-title">Tags</h3>
+                <ul>
+                    <li class="nav-tag-item" id="nav-tag-item-show-all"><p class="navbar-tag">Show All</p></li>
+                    {% for tag in tags %}
+                    <li class="nav-tag-item">
+                        <p class="navbar-tag">{{ tag.tag }}</p>
+                        <p>{{ tag.number }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+    </nav>
+
+
+    <div class="scroll_bar">
+        <div class="scroll_top">
+            <h3>All notes</h3>
+            <form action="/" method="post">
+                <input type="submit" name="action" value="New note" id="add-note-btn">
+            </form>
+            <input type="search" autocomplete="off" autofocus placeholder="Search" id="input_search">
+            <h4>Options</h4>
+        </div>
+        <div class="scroll_bottom">
+            {% for note in notes %}
+            <div class="notes">
+                <form action="/" method="post" class="scroll-bar-note-header">
+                    <input name="note-id" type="hidden" value="{{ note.id }}">
+                    <input name="note-tag-hidden" type="hidden" value="{{ note.tag }}">
+                    <input type="submit" name="action" value="Edit" id="scroll-bar-note-edit-icon">
+                    <input type="submit" name="action" value="Delete" id="scroll-bar-note-delete-icon">
+                </form>
+                <h3 class="scroll-bar-note-title">{{ note.title }}</h3>
+                <div class="scroll-bar-description-container">
+                    <h5 class="scroll-bar-note-description">{{ note.description }}</h5>
+                </div>
+                <footer class="scroll-bar-note-footer">
+                    <p class="scroll-bar-note-tag">{{ note.tag }}</p>
+                    <p class="scroll-bar-note-timestamp">Last update: {{ note.date }}</p>
+                </footer>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <section class="note-text">
+        <form action="/" method="post">
+            <div class="note-section-top">
+                <input autocomplete="off" autofocus id="note-title" name="note-title" placeholder="{{ title }}" type="text">
+                <p id="changes-alert">All changes saved</p>
+                <div id="note-tag-before"><input autocomplete="off" autofocus id="note-tag" name="note-tag"
+                        placeholder="{{ tag }}" type="text"></div>
+                <nav class="note-text-nav">
+                    <ul>
+                        <li><button class="note-section-btn" type="submit">Options</button></li>
+                        <li><button class="note-section-btn" type="submit">Editor</button></li>
+                        <li><button class="note-section-btn" type="submit">Actions</button></li>
+                        <li><button class="note-section-btn" type="submit">History</button></li>
+                        <input name="current-note-id" type="hidden" value="{{ id }}">
+                    </ul>
+                </nav>
+            </div>
+            <div class="note-text-textarea">
+                <textarea name="text-area" class="note-text_bottom" rows="10" cols="20">{{ textarea }}</textarea>
+                <div class="note-section-save-div">
+                    <input name="action" value="Delete Note" type="submit" class="note-section-footer-btn">
+                    <input name="action" value="Save Note" type="submit" class="note-section-footer-btn">
+                </div>
+            </div>
+        </form>
+    </section>
+
+{% endblock %}
