@@ -61,6 +61,13 @@ for (i = 0; i < notes.length; i++) {
     }
 }
 
+// remove delete button
+for (i = 0; i < notes.length; i++) {
+    if (notes[i].firstElementChild.childNodes[5].value == "deleted") {
+        document.querySelector(".delete-note-btn").style.display = "none";
+        document.querySelector("#scroll-bar-note-edit-icon").style.display = "none";
+    }
+}
 
 
 
