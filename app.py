@@ -37,16 +37,36 @@ def index():
 
     id = request.form.get("note-id")
 
+    status = {"active_status": "active", "deleted_status": "deleted", "archived_status": "archived"}
+
     # standard behaviour
     tags = db.execute(
         "SELECT tag, COUNT(*) AS number FROM notes GROUP BY tag")
-    notes = db.execute("SELECT * FROM notes ORDER BY id DESC")
+    
+    
+    all_notes = db.execute("SELECT * FROM notes ORDER BY id DESC")
+    active_notes = db.execute("SELECT * FROM notes WHERE status = ? ORDER BY id DESC ", status["active_status"])
+    deleted_notes = db.execute("SELECT * FROM notes WHERE status = ? ORDER BY id DESC ", status["deleted_status"])
+    archived_notes = db.execute("SELECT * FROM notes WHERE status = ? ORDER BY id DESC ", status["archived_status"])
+
 
     # User reached route via POST
     if request.method == "POST":
 
-        if request.form['action'] == "New note":
-            return render_template("index.html", notes=notes, tags=tags)
+        if request.form["action"] == "All notes":
+            return render_template("index.html", notes=all_notes, tags=tags)
+        
+        elif request.form["action"] == "Active":
+            return render_template("index.html", notes=active_notes, tags=tags)
+
+        elif request.form["action"] == "Archive":
+            return render_template("index.html", notes=archived_notes, tags=tags)
+
+        elif request.form["action"] == "Trash bin":
+            return render_template("index.html", notes=deleted_notes, tags=tags)
+
+        elif request.form['action'] == "New note":
+            return render_template("index.html", notes=active_notes, tags=tags)
 
         elif request.form['action'] == 'Edit':
             note = db.execute("SELECT id, title, tag, description FROM notes WHERE id = ?", id)
@@ -56,17 +76,19 @@ def index():
             tag = note[0]["tag"]
             id = note[0]["id"]
 
-            return render_template("index.html", id=id, notes=notes, tag=tag, tags=tags, title=title, textarea=textarea)
+            return render_template("index.html", id=id, notes=active_notes, tag=tag, tags=tags, title=title, textarea=textarea)
 
         elif request.form['action'] == 'Delete':
-            db.execute("DELETE FROM notes WHERE id = ?", id)
+            db.execute("UPDATE notes SET status = ? WHERE id = ?", status["deleted_status"], id)
             return redirect("/")
         
         elif request.form['action'] == 'Delete Note':
             current_id = request.form.get("current-note-id")
+            print(current_id)
             
             if current_id:
-                db.execute("DELETE FROM notes WHERE id = ?", current_id)
+                db.execute("UPDATE notes SET status = ? WHERE id = ?", status["deleted_status"], id)
+                return redirect("/")
             
             return redirect("/")
 
@@ -86,23 +108,22 @@ def index():
                     tag = current_note["tag"]
                 if not text:
                     text = current_note["description"]
-                date = current_note["date"]
                 
                 db.execute("UPDATE notes SET title = ?, description = ?, tag = ?, date = CURRENT_TIMESTAMP WHERE id = ?", title, text, tag, current_id)
             else:     
-                db.execute("INSERT INTO notes (title, description, tag) VALUES (?, ?, ?)", title, text, tag)
+                db.execute("INSERT INTO notes (title, description, tag, status) VALUES (?, ?, ?, ?)", title, text, tag, status["active_status"])
             
             return redirect("/")
 
         elif request.form['action'] == '+':
 
             text =" "
-            return render_template("index.html", textarea=text, notes=notes, tags=tags)
+            return render_template("index.html", textarea=text, notes=active_notes, tags=tags)
 
         else:
-            return render_template("index.html", notes=notes, tags=tags)
+            return render_template("index.html", notes=active_notes, tags=tags)
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
-        return render_template("index.html", notes=notes, tags=tags)
+        return render_template("index.html", notes=active_notes, tags=tags)
 

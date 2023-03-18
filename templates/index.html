@@ -15,9 +15,12 @@ Note taking app
 
             <nav class="views_nav">
                 <ul>
-                    <li class="nav-view-item"><a href="#">All notes</a></li>
-                    <li class="nav-view-item"><a href="#">Archive</a></li>
-                    <li class="nav-view-item"><a href="#">Trash</a></li>
+                    <form action="/" method="post">
+                        <li><input class="nav-view-item" type="submit" name="action" value="All notes"></li>
+                        <li><input class="nav-view-item" type="submit" name="action" value="Active"></li>
+                        <li><input class="nav-view-item" type="submit" name="action" value="Archive"></li>
+                        <li><input class="nav-view-item" type="submit" name="action" value="Trash bin"></li>
+                </form>
                 </ul>
             </nav>
         </div>
