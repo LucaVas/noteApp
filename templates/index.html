@@ -10,7 +10,6 @@ Note taking app
         <div class="nav_views">
             <div class="views_top">
                 <h3>Views</h3>
-                <button>+</button>
             </div>
 
             <nav class="views_nav">
@@ -80,10 +79,17 @@ Note taking app
                         placeholder="{{ tag }}" type="text"></div>
                 <nav class="note-text-nav">
                     <ul>
+                        <li class="dropdown">
+                            <button class="note-section-btn" type="submit">Editor
+                                <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="dropdown-content">
+                                <input type="text" value="Edit one">
+                                <input type="text" value="Edit two">
+                                <input type="text" value="Edit three">
+                            </div>                        
+                        </li>
                         <li><button class="note-section-btn" type="submit">Options</button></li>
-                        <li><button class="note-section-btn" type="submit">Editor</button></li>
-                        <li><button class="note-section-btn" type="submit">Actions</button></li>
-                        <li><button class="note-section-btn" type="submit">History</button></li>
                         <input name="current-note-id" type="hidden" value="{{ id }}">
                     </ul>
                 </nav>

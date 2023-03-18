@@ -86,6 +86,45 @@
         margin-right: 2rem;
     }
 
+    /* Dropdown */
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: rgba(31, 2, 22, 0.1);
+        min-width: 8rem;
+        min-height: 10rem;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content input {
+        background-color: var(--secondary-bg-color);
+        color: vat(--text-color);
+        border: none;
+    }
+
+    .dropdown-content input:hover {
+        background-color: var(--text-color);
+        color: var(--main-bg-color);
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .dropdown:hover .note-section-btn {
+        background-color: var(--accent-color);
+    }
+
 
     /* NAV SECTION ENDS */
 
