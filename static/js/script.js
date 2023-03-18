@@ -20,7 +20,7 @@ function filterNotesByTag(e) {
 
     // make all notes visible
     for (let i = 0; i < notes.length; i++) {
-        if (notes[0].firstElementChild.childNodes[5].value == "active") {
+        if (notes[i].firstElementChild.childNodes[5].value == "active") {
             notes[i].style.display = "flex";
         }
     }
@@ -52,7 +52,14 @@ for (let i = 0; i < tags.length; i++) {
 
 
 // change color of note if archived or deleted
-
+for (i = 0; i < notes.length; i++) {
+    if (notes[i].firstElementChild.childNodes[5].value == "deleted") {
+        notes[i].style.backgroundColor = "rgba(255, 0, 0, 0.308)";
+    }
+    else if (notes[i].firstElementChild.childNodes[5].value == "archived") {
+        notes[i].style.backgroundColor = "rgba(232, 197, 71, 0.286)";
+    }
+}
 
 
 

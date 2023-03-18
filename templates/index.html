@@ -56,7 +56,7 @@ Note taking app
                     <input name="note-tag-hidden" type="hidden" value="{{ note.tag }}">
                     <input name="note-status" type="hidden" value="{{ note.status }}">
                     <input type="submit" name="action" value="Edit" id="scroll-bar-note-edit-icon">
-                    <input type="submit" name="action" value="Delete" id="scroll-bar-note-delete-icon">
+                    <input type="submit" name="action" value="Delete" id="scroll-bar-note-delete-icon" class="delete-note-btn">
                 </form>
                 <h3 class="scroll-bar-note-title">{{ note.title }}</h3>
                 <div class="scroll-bar-description-container">
@@ -91,7 +91,7 @@ Note taking app
             <div class="note-text-textarea">
                 <textarea name="text-area" class="note-text_bottom" rows="10" cols="20">{{ textarea }}</textarea>
                 <div class="note-section-save-div">
-                    <input name="action" value="Delete Note" type="submit" class="note-section-footer-btn">
+                    <input name="action" value="Delete Note" type="submit" class="note-section-footer-btn delete-note-btn">
                     <input name="action" value="Save Note" type="submit" class="note-section-footer-btn">
                 </div>
             </div>

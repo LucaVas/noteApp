@@ -2,8 +2,12 @@
     --main-bg-color: rgb(31, 2, 22);
     --secondary-bg-color: rgb(40, 9, 31);
     --text-color: rgb(244, 244, 249);
-    --accent-color: #E8C547;
+    --accent-color: rgb(232, 197, 71);
+    --deleted-color: rgba(255, 0, 0, 0.308);
+    --archived-color: rgba(232, 197, 71, 0.286);
 }
+
+
 
 * {
     margin: 0;
