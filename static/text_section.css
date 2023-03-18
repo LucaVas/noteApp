@@ -2,6 +2,10 @@
     .note_text {
         display: none;
     }
+
+    .note-text-textarea {
+        display: none;
+    }
 }
 
 @media (width >=1081px) {

@@ -54,6 +54,7 @@ Note taking app
                 <form action="/" method="post" class="scroll-bar-note-header">
                     <input name="note-id" type="hidden" value="{{ note.id }}">
                     <input name="note-tag-hidden" type="hidden" value="{{ note.tag }}">
+                    <input name="note-status" type="hidden" value="{{ note.status }}">
                     <input type="submit" name="action" value="Edit" id="scroll-bar-note-edit-icon">
                     <input type="submit" name="action" value="Delete" id="scroll-bar-note-delete-icon">
                 </form>

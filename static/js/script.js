@@ -20,7 +20,9 @@ function filterNotesByTag(e) {
 
     // make all notes visible
     for (let i = 0; i < notes.length; i++) {
-        notes[i].style.display = "flex";
+        if (notes[0].firstElementChild.childNodes[5].value == "active") {
+            notes[i].style.display = "flex";
+        }
     }
 
     eventTarget.style.backgroundColor = "white";
@@ -47,6 +49,10 @@ function filterNotesByTag(e) {
 for (let i = 0; i < tags.length; i++) {
     tags[i].addEventListener("click", filterNotesByTag);
 }
+
+
+// change color of note if archived or deleted
+
 
 
 

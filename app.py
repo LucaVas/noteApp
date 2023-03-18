@@ -42,7 +42,7 @@ def index():
 
     # group tags to display in navbar
     tags = db.execute(
-        "SELECT tag, COUNT(*) AS number FROM notes GROUP BY tag")
+        "SELECT tag, COUNT(*) AS number FROM notes WHERE status = ? GROUP BY tag", status["active_status"])
     
     # possible views of notes
     all_notes = db.execute("SELECT * FROM notes ORDER BY id DESC")
