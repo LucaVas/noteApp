@@ -37,13 +37,14 @@ def index():
 
     id = request.form.get("note-id")
 
+    # list of possible notes statuses
     status = {"active_status": "active", "deleted_status": "deleted", "archived_status": "archived"}
 
-    # standard behaviour
+    # group tags to display in navbar
     tags = db.execute(
         "SELECT tag, COUNT(*) AS number FROM notes GROUP BY tag")
     
-    
+    # possible views of notes
     all_notes = db.execute("SELECT * FROM notes ORDER BY id DESC")
     active_notes = db.execute("SELECT * FROM notes WHERE status = ? ORDER BY id DESC ", status["active_status"])
     deleted_notes = db.execute("SELECT * FROM notes WHERE status = ? ORDER BY id DESC ", status["deleted_status"])
