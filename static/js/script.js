@@ -1,10 +1,8 @@
-// script that filters notes based on the tag clicked
-
-const tags = document.querySelectorAll(".nav-tag-item");
-const notes = document.querySelectorAll('.notes');
-
 // function which filters notes by tag selected
 function filterNotesByTag(e) {
+
+    const tags = document.querySelectorAll(".nav-tag-item");
+    const notes = document.querySelectorAll('.notes');
 
     eventTarget = e.target;
 
@@ -104,11 +102,31 @@ function enableButtons(e) {
     }
 };
 
+function removeButtonsFromDeletedNotes() {
+    const notes = document.querySelectorAll('.notes');
+    
+    // remove delete button
+    for (i = 0; i < notes.length; i++) {
+        if (notes[i].firstElementChild.childNodes[5].value === "deleted") {
+            notes[i].querySelector(".delete-note-btn").style.display = "none";
+            notes[i].querySelector("#scroll-bar-note-edit-icon").style.display = "none";
+        }
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function() {
+    const notes = document.querySelectorAll('.notes');
+    const tags = document.querySelectorAll(".nav-tag-item");
+    
     // apply event listener to all tags
     for (let i = 0; i < tags.length; i++) {
         tags[i].addEventListener("click", filterNotesByTag);
     }
+
+    removeButtonsFromDeletedNotes();
+
+    document.querySelector("#scroll-bar-note-delete-icon").onclick = removeButtonsFromDeletedNotes;
+    document.querySelector(".delete-note-btn").onclick = removeButtonsFromDeletedNotes;
 
 
     // change color of note if archived or deleted
@@ -118,14 +136,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         else if (notes[i].firstElementChild.childNodes[5].value == "archived") {
             notes[i].style.backgroundColor = "rgba(232, 197, 71, 0.286)";
-        }
-    }
-
-    // remove delete button
-    for (i = 0; i < notes.length; i++) {
-        if (notes[i].firstElementChild.childNodes[5].value == "deleted") {
-            document.querySelector(".delete-note-btn").style.display = "none";
-            document.querySelector("#scroll-bar-note-edit-icon").style.display = "none";
         }
     }
 

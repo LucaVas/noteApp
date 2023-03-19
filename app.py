@@ -85,13 +85,21 @@ def index():
         
         elif request.form['action'] == 'Delete Note':
             current_id = request.form.get("current-note-id")
-            print(current_id)
             
             if current_id:
                 db.execute("UPDATE notes SET status = ? WHERE id = ?", status["deleted_status"], current_id)
                 return redirect("/")
             
             return redirect("/")
+
+        elif request.form['action'] == 'Archive Note':
+            current_id = request.form.get("current-note-id")
+            
+            if current_id:
+                db.execute("UPDATE notes SET status = ? WHERE id = ?", status["archived_status"], current_id)
+                return redirect("/")
+            
+            return redirect("/")        
 
         elif request.form['action'] == 'Save Note':
             
@@ -110,7 +118,7 @@ def index():
                 if not text:
                     text = current_note["description"]
                 
-                db.execute("UPDATE notes SET title = ?, description = ?, tag = ?, date = CURRENT_TIMESTAMP WHERE id = ?", title, text, tag, current_id)
+                db.execute("UPDATE notes SET title = ?, description = ?, tag = ?, status = ?, date = CURRENT_TIMESTAMP WHERE id = ?", title, text, tag, status["active_status"], current_id)
             else:     
                 db.execute("INSERT INTO notes (title, description, tag, status) VALUES (?, ?, ?, ?)", title, text, tag, status["active_status"])
             
