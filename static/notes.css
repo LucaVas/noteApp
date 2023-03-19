@@ -36,7 +36,7 @@
         background-color: var(--accent-color);
     }
 
-    #input_search {
+    #input-search {
         padding: 0 0.5rem;
         grid-row: 2;
         grid-column: 1 / 4;
@@ -177,7 +177,7 @@
         background-color: var(--secondary-bg-color);
     }
 
-    #input_search {
+    #input-search {
         padding: 0 0.5rem;
         grid-row: 2;
         grid-column: 1 / 4;
@@ -323,7 +323,7 @@
         border: 1px solid var(--main-bg-color);
     }
 
-    #input_search {
+    #input-search {
         padding: 0 0.5rem;
         grid-row: 2;
         grid-column: 1 / 4;
