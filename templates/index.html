@@ -71,7 +71,7 @@ Note taking app
     </div>
 
     <section class="note-text">
-        <form action="/" method="post">
+        <form action="/" method="post" id="note-text-form">
             <div class="note-section-top">
                 <input autocomplete="off" autofocus id="note-title" name="note-title" placeholder="{{ title }}" type="text">
                 <p id="changes-alert">All changes saved</p>
@@ -90,7 +90,7 @@ Note taking app
                             </div>                        
                         </li>
                         <li><button class="note-section-btn" type="submit">Options</button></li>
-                        <input name="current-note-id" type="hidden" value="{{ id }}">
+                        <input name="current-note-id" type="hidden" value="{{ id }}" id="current-note-id">
                     </ul>
                 </nav>
             </div>

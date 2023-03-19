@@ -43,7 +43,7 @@ function filterNotesByTag(e) {
 
 
 
-}
+};
 
 function filterByInput(e) {
     filter = e.target.value.toLowerCase();
@@ -68,7 +68,41 @@ function filterByInput(e) {
             notes[i].style.display = "none";
         }
     }
+};
+
+function disableButtons() {
+
+    if (!document.querySelector("#current-note-id").value) {
+
+        // disable save and delete buttons when note is not yet saved (first note)
+        footerButtons = document.querySelectorAll(".note-section-footer-btn");
+        footerButtons.forEach(element => {
+            element.disabled = true;
+            element.style.backgroundColor = "grey";
+        });
+    }
+
+
 }
+
+function enableButtons(e) {
+
+    disableButtons();
+
+    // loop through elements of the form
+    titleLength = document.querySelector("#note-title").value.length;
+    tagLength = document.querySelector("#note-tag").value.length;
+    textLength = document.querySelector(".note-text_bottom").value.length;
+    
+    if (titleLength < 1 || tagLength < 1 || textLength < 1) {
+        // do nothing
+    } else {
+        footerButtons.forEach(element => {
+            element.disabled = false;
+            element.style.backgroundColor = "rgb(232, 197, 71)";
+        });
+    }
+};
 
 document.addEventListener("DOMContentLoaded", function() {
     // apply event listener to all tags
@@ -97,5 +131,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // filter notes by input
     document.querySelector("#input-search").onkeyup = filterByInput;
-    }
-);
+
+    
+    // disable/enable save and delete buttons when note is not yet saved (first note)
+    disableButtons();
+    document.querySelector("#note-text-form").onkeyup = enableButtons;
+});
