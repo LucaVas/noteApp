@@ -26,7 +26,7 @@ function filterNotesByTag(e) {
     eventTarget.style.backgroundColor = "white";
 
     if (eventTarget.innerText == "Show All") {
-        console.log(eventTarget.innerText);
+        //
     } 
     else {
         for (let i = 0; i < notes.length; i++) {
@@ -90,7 +90,7 @@ function enableButtons(e) {
     // loop through elements of the form
     titleLength = document.querySelector("#note-title").value.length;
     tagLength = document.querySelector("#note-tag").value.length;
-    textLength = document.querySelector(".note-text_bottom").value.length;
+    textLength = document.querySelector(".note-text_bottom").innerHTML.length;
     
     if (titleLength < 1 || tagLength < 1 || textLength < 1) {
         // do nothing
@@ -112,6 +112,13 @@ function removeButtonsFromDeletedNotes() {
             notes[i].querySelector("#scroll-bar-note-edit-icon").style.display = "none";
         }
     }
+}
+
+function updateValue(e) {
+    text = e.target.innerHTML;
+    document.querySelector("#note-text-bottom-hidden").value = text;
+
+    console.log(document.querySelector("#note-text-bottom-hidden").value);
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -146,4 +153,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // disable/enable save and delete buttons when note is not yet saved (first note)
     disableButtons();
     document.querySelector("#note-text-form").onkeyup = enableButtons;
+
+    // add to textarea an even listener which adds the content to the hidden input
+    document.querySelector(".note-text_bottom").onkeyup = updateValue;
 });

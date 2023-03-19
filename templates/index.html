@@ -59,7 +59,7 @@ Note taking app
                 </form>
                 <h3 class="scroll-bar-note-title">{{ note.title }}</h3>
                 <div class="scroll-bar-description-container">
-                    <h5 class="scroll-bar-note-description">{{ note.description }}</h5>
+                    <p class="scroll-bar-note-description">{{ note.description | safe }}</p>
                 </div>
                 <footer class="scroll-bar-note-footer">
                     <p class="scroll-bar-note-tag">{{ note.tag }}</p>
@@ -95,7 +95,8 @@ Note taking app
                 </nav>
             </div>
             <div class="note-text-textarea">
-                <textarea name="text-area" class="note-text_bottom" rows="10" cols="20">{{ textarea }}</textarea>
+                <input name="text-area" type="hidden" value="" id="note-text-bottom-hidden">
+                <div class="note-text_bottom" contenteditable>{{ textarea | safe }}</div>
                 <div class="note-section-save-div">
                     <input name="action" value="Archive Note" type="submit" class="note-section-footer-btn archive-note-btn">
                     <input name="action" value="Delete Note" type="submit" class="note-section-footer-btn delete-note-btn">

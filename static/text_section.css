@@ -142,7 +142,7 @@
         padding: 1rem;
     }
 
-    textarea {
+    .note-text_bottom {
         padding: 1rem;
         resize: none;
         line-height: 1.5;
