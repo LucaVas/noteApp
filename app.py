@@ -88,7 +88,7 @@ def index():
             print(current_id)
             
             if current_id:
-                db.execute("UPDATE notes SET status = ? WHERE id = ?", status["deleted_status"], id)
+                db.execute("UPDATE notes SET status = ? WHERE id = ?", status["deleted_status"], current_id)
                 return redirect("/")
             
             return redirect("/")
