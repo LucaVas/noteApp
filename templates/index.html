@@ -90,6 +90,10 @@ Note taking app
                             </div>                        
                         </li>
                         <li><button class="note-section-btn" type="submit">Options</button></li>
+                        <li><button class="text-editor-btn"><img src="/static/images/Icons/bold_icon.png" alt="bold icon" id="bold-icon"></button></li>
+                        <li><button class="text-editor-btn"><img src="/static/images/Icons/italic_icon.png" alt="italic icon" id="italic-icon"></button></li>
+                        <li><button class="text-editor-btn"><img src="/static/images/Icons/strikethrough_icon.png" alt="strikethrough icon" id="strikethrough-icon"></button></li>
+                        <li><button class="text-editor-btn"><img src="/static/images/Icons/underline_icon.png" alt="underline icon" id="underline-icon"></button></li>
                         <input name="current-note-id" type="hidden" value="{{ id }}" id="current-note-id">
                     </ul>
                 </nav>
@@ -100,7 +104,7 @@ Note taking app
                 <div class="note-section-save-div">
                     <input name="action" value="Archive Note" type="submit" class="note-section-footer-btn archive-note-btn">
                     <input name="action" value="Delete Note" type="submit" class="note-section-footer-btn delete-note-btn">
-                    <input name="action" value="Save Note" type="submit" class="note-section-footer-btn">
+                    <input name="action" value="Save Note" type="submit" class="note-section-footer-btn" id="save-note-btn">
                 </div>
             </div>
         </form>
