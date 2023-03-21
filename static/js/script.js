@@ -114,15 +114,11 @@ function removeButtonsFromDeletedNotes() {
     }
 }
 
-function updateValue(e) {
-    text = e.target.innerHTML;
-    document.querySelector("#note-text-bottom-hidden").value = text;
-}
-
 function makeBold(e) {
     const strongElement = document.createElement("strong");
     const userSelection = window.getSelection();
     const selectedTextRange = userSelection.getRangeAt(0);
+    console.log(selectedTextRange)
     selectedTextRange.surroundContents(strongElement);
 
     e.preventDefault();
@@ -180,6 +176,12 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    // add to textarea an even listener which adds the content to the hidden input
+    document.addEventListener("mousemove", () => {
+        let text = document.querySelector(".note-text_bottom").innerHTML;
+        document.querySelector("#note-text-bottom-hidden").value = text;
+    });
+
     // filter notes by input
     document.querySelector("#input-search").onkeyup = filterByInput;
 
@@ -188,16 +190,11 @@ document.addEventListener("DOMContentLoaded", function() {
     disableButtons();
     document.querySelector("#note-text-form").onkeyup = enableButtons;
 
-    // add to textarea an even listener which adds the content to the hidden input
-    document.querySelector(".note-text_bottom").onkeyup = updateValue;
+    
 
     document.querySelector("#bold-icon").onclick = makeBold;
     document.querySelector("#italic-icon").onclick = makeItalic;
     document.querySelector("#strikethrough-icon").onclick = makeStrikedthrough;
     document.querySelector("#underline-icon").onclick = makeUnderlined;
 
-    document.querySelector("#save-note-btn").addEventListener("click", () => {
-        console.log(document.querySelector(".note-text_bottom").innerText);
-    });
-    
 });

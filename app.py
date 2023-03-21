@@ -11,6 +11,7 @@ import re
 # Configure application
 app = Flask(__name__)
 
+
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 # Configure session to use filesystem (instead of signed cookies)
 # Session has a default time limit of some number of minutes or hours or days after which it will expire.
@@ -117,6 +118,8 @@ def index():
                     tag = current_note["tag"]
                 if not text:
                     text = current_note["description"]
+
+                print(text)
                 
                 db.execute("UPDATE notes SET title = ?, description = ?, tag = ?, status = ?, date = CURRENT_TIMESTAMP WHERE id = ?", title, text, tag, status["active_status"], current_id)
             else:     
@@ -136,3 +139,5 @@ def index():
     else:
         return render_template("index.html", notes=active_notes, tags=tags)
 
+if __name__ == "__main__":
+    app.run(debug=True, host="192.168.1.75")
