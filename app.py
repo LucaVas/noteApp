@@ -5,7 +5,7 @@ from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
-
+# from helpers import login_required
 import re
 
 # Configure application
@@ -138,6 +138,60 @@ def index():
     # User reached route via GET (as by clicking a link or via redirect)
     else:
         return render_template("index.html", notes=active_notes, tags=tags)
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    """Register user"""
+
+    # Forget any user_id
+    session.clear()
+
+    title = "Password must contain at least 8 characters, and at least one lowercase, one uppercase, one number and one special character."
+    regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&-.,])[A-Za-z\d@$!%*?&-.,]{8,}$'
+    # User reached route via POST (as by submitting a form via POST)
+    if request.method == "POST":
+
+        # Require username. Render apology if user’s input is blank or the username already exists.
+        if not request.form.get("username"):
+            return apology("must provide username", 400)
+
+        # Require password. Render an apology if password is blank or the passwords do not match
+        elif not request.form.get("password"):
+            return apology("must provide password", 400)
+
+        # Require users’ passwords to have at least 1 upper, 1 lower, 1 number and 1 symbol
+        if not re.match(regex, request.form.get("password")):
+            return apology("password must be at least 8 characters and contain uppercase, lowercase, number and symbol", 400)
+
+        username = request.form.get("username")
+        password = request.form.get("password")
+        confirmation = request.form.get("confirmation")
+
+        # Render an apology if passwords do not match
+        if password != confirmation:
+            return apology("passwords don't match", 400)
+
+        # Query database for username
+        user_db = db.execute("SELECT * FROM users WHERE username = ?",
+                             request.form.get("username"))
+
+        # Render apology if username already exists
+        if user_db:
+            return apology("user already exists", 400)
+
+        # INSERT the new user into users
+        db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username,
+                   generate_password_hash(password, method='pbkdf2:sha256', salt_length=8))
+
+        # Redirect user to home page
+        flash("Uou are successfuly registered!")
+        return redirect("/")
+
+    # User reached route via GET (as by clicking a link or via redirect)
+    else:
+        return render_template("register.html", title=title)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="192.168.1.75")
