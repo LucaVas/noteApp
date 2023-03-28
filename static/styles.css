@@ -51,6 +51,27 @@ button:hover {
     cursor: pointer;
 }
 
+header {
+    position: absolute;
+    height: auto;
+    width: 100vw;
+}
+
+.flash_alert {
+    all: unset;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    height: 3rem;
+    width: 100vw;
+    color: var(--main-bg-color);
+    font-weight: bold;
+    background-color: var(--accent-color);
+    z-index: 1;
+}
+
 @media (width <=650px) {
     body {
         display: flex;

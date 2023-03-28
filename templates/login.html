@@ -1,17 +1,19 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Log In
+    Register
 {% endblock %}
 
 {% block main %}
-    <form action="/login" method="post">
-        <div class="mb-3">
-            <input autocomplete="off" autofocus class="login-form-field" id="username" name="username" placeholder="Username" type="text">
+<div class="login-container">
+    <form action="/login" method="post" class="login-form">
+        <div class="login-form-field-div">
+            <input autocomplete="off" autofocus class="login-form-field" id="email" name="email" placeholder="Email" type="text" required>
         </div>
-        <div class="mb-3">
-            <input class="login-form-field" id="password" name="password" placeholder="Password" type="password">
+        <div class="login-form-field-div">
+            <input class="login-form-field" id="password" name="password" placeholder="Password" type="password" minlength="8" required>
         </div>
-        <button class="btn btn-primary" type="submit">Log In</button>
+        <button class="login-form-btn" type="submit">Log in</button>
     </form>
+</div>
 {% endblock %}

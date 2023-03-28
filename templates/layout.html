@@ -21,24 +21,31 @@
     <title>{% block title %}{% endblock %}</title>
 
 </head>
+    <body>
 
-<body>
 
-    {% block body %}
-    {% endblock %}
+        {% if get_flashed_messages() %}
+        <header>
+            <div class="flash_alert">
+                {{ get_flashed_messages() | join(" ") }}
+            </div>
+        </header>
+        {% endif %}
 
-    <main>
-        {% block main %}
+        {% block body %}
         {% endblock %}
-    </main>
 
-    <!-- <footer>
-        (c) Luca Vassos, 2023
-    </footer> -->
+        <main>
+            {% block main %}
+            {% endblock %}
+        </main>
+
+        <!-- <footer>
+            (c) Luca Vassos, 2023
+        </footer> -->
 
 
-    
+        
 
-</body>
-
+    </body>
 </html>

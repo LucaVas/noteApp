@@ -7,13 +7,16 @@
 {% block main %}
 <div class="login-container">
     <form action="/register" method="post" class="login-form">
-        <div class="mb-3">
+        <div class="login-form-field-div">
             <input autocomplete="off" autofocus class="login-form-field" id="username" name="username" placeholder="Username" type="text" required>
         </div>
-        <div class="mb-3">
+        <div class="login-form-field-div">
+            <input autocomplete="off" autofocus class="login-form-field" id="email" name="email" placeholder="Email" type="text" required>
+        </div>
+        <div class="login-form-field-div">
             <input class="login-form-field" id="password" name="password" placeholder="Password" type="password" minlength="8" required>
         </div>
-        <div class="mb-3">
+        <div class="login-form-field-div">
             <input class="login-form-field" id="confirmation" name="confirmation" placeholder="Password" type="password" minlength="8" required>
         </div>
         <button class="login-form-btn" type="submit">Register</button>

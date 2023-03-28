@@ -147,44 +147,54 @@ def register():
     session.clear()
 
     title = "Password must contain at least 8 characters, and at least one lowercase, one uppercase, one number and one special character."
-    regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&-.,])[A-Za-z\d@$!%*?&-.,]{8,}$'
+    # regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&-.,])[A-Za-z\d@$!%*?&-.,]{8,}$'
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
         # Require username. Render apology if user’s input is blank or the username already exists.
         if not request.form.get("username"):
-            return apology("must provide username", 400)
+            flash("Must provide username")
+            return render_template("register.html", title=title)
+
+        # Require email. Render apology if user’s input is blank or the email already exists.
+        if not request.form.get("email"):
+            flash("Must provide email")
+            return render_template("register.html", title=title)
 
         # Require password. Render an apology if password is blank or the passwords do not match
         elif not request.form.get("password"):
-            return apology("must provide password", 400)
+            flash("Must provide password")
+            return render_template("register.html", title=title)
 
         # Require users’ passwords to have at least 1 upper, 1 lower, 1 number and 1 symbol
-        if not re.match(regex, request.form.get("password")):
-            return apology("password must be at least 8 characters and contain uppercase, lowercase, number and symbol", 400)
+        # if not re.match(regex, request.form.get("password")):
+        #     return apology("password must be at least 8 characters and contain uppercase, lowercase, number and symbol", 400)
+
 
         username = request.form.get("username")
+        email = request.form.get("email")
         password = request.form.get("password")
         confirmation = request.form.get("confirmation")
 
         # Render an apology if passwords do not match
         if password != confirmation:
-            return apology("passwords don't match", 400)
+            flash("Passwords don't match")
+            return render_template("register.html", title=title)
 
-        # Query database for username
-        user_db = db.execute("SELECT * FROM users WHERE username = ?",
-                             request.form.get("username"))
+        # Query database for email
+        user_db = db.execute("SELECT * FROM users WHERE email = ?",
+                             email)
 
-        # Render apology if username already exists
+        # Render apology if email already exists
         if user_db:
-            return apology("user already exists", 400)
+            flash("User already exist")
+            return render_template("register.html", title=title)
 
         # INSERT the new user into users
-        db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username,
-                   generate_password_hash(password, method='pbkdf2:sha256', salt_length=8))
+        db.execute("INSERT INTO users (username, hash, email) VALUES (?, ?, ?)", username, generate_password_hash(password, method='pbkdf2:sha256', salt_length=8), email)
 
         # Redirect user to home page
-        flash("Uou are successfuly registered!")
+        flash("You are successfuly registered!")
         return redirect("/")
 
     # User reached route via GET (as by clicking a link or via redirect)
