@@ -74,13 +74,16 @@ Note taking app
         <form action="/" method="post" id="note-text-form">
             <div class="note-section-top">
                 <input autocomplete="off" autofocus id="note-title" name="note-title" placeholder="{{ title }}" type="text">
-                <p id="changes-alert">All changes saved</p>
+                <div id="changes-alert">
+                    <p>User: {{ current_username }}</p>
+                    <p><a class="nav-link" href="/logout">Log Out</a></p>
+                </div>
                 <div id="note-tag-before"><input autocomplete="off" autofocus id="note-tag" name="note-tag"
                         placeholder="{{ tag }}" type="text"></div>
                 <nav class="note-text-nav">
                     <ul>
                         <li class="dropdown">
-                            <button class="note-section-btn" type="submit">Editor
+                            <!-- <button class="note-section-btn" type="submit">Editor -->
                                 <i class="fa fa-caret-down"></i>
                             </button>
                             <div class="dropdown-content">
@@ -89,11 +92,10 @@ Note taking app
                                 <input type="text" value="Edit three">
                             </div>                        
                         </li>
-                        <li><button class="note-section-btn" type="submit">Options</button></li>
-                        <li><button class="text-editor-btn"><img src="/static/images/Icons/bold_icon.png" alt="bold icon" id="bold-icon"></button></li>
-                        <li><button class="text-editor-btn"><img src="/static/images/Icons/italic_icon.png" alt="italic icon" id="italic-icon"></button></li>
-                        <li><button class="text-editor-btn"><img src="/static/images/Icons/strikethrough_icon.png" alt="strikethrough icon" id="strikethrough-icon"></button></li>
-                        <li><button class="text-editor-btn"><img src="/static/images/Icons/underline_icon.png" alt="underline icon" id="underline-icon"></button></li>
+                        <li class="text-editor-btn"><img src="/static/images/Icons/bold_icon.png" alt="bold icon" id="bold-icon"></li>
+                        <li class="text-editor-btn"><img src="/static/images/Icons/italic_icon.png" alt="italic icon" id="italic-icon"></li>
+                        <li class="text-editor-btn"><img src="/static/images/Icons/strikethrough_icon.png" alt="strikethrough icon" id="strikethrough-icon"></li>
+                        <li class="text-editor-btn"><img src="/static/images/Icons/underline_icon.png" alt="underline icon" id="underline-icon"></li>
                         <input name="current-note-id" type="hidden" value="{{ id }}" id="current-note-id">
                     </ul>
                 </nav>

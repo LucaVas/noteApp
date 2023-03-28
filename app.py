@@ -5,7 +5,7 @@ from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
-# from helpers import login_required
+from helpers import login_required
 import re
 
 # Configure application
@@ -34,7 +34,11 @@ def after_request(response):
 
 
 @app.route("/", methods=["GET", "POST"])
+@login_required
 def index():
+
+    current_username = db.execute(
+        "SELECT username FROM users WHERE id = ?", session["user_id"])[0]["username"]
 
     id = request.form.get("note-id")
 
@@ -43,52 +47,52 @@ def index():
 
     # group tags to display in navbar
     tags = db.execute(
-        "SELECT tag, COUNT(*) AS number FROM notes WHERE status = ? GROUP BY tag", status["active_status"])
+        "SELECT tag, COUNT(*) AS number FROM notes WHERE user_id = ? AND status = ? GROUP BY tag", session["user_id"], status["active_status"])
     
     # possible views of notes
-    all_notes = db.execute("SELECT * FROM notes ORDER BY id DESC")
-    active_notes = db.execute("SELECT * FROM notes WHERE status = ? ORDER BY id DESC ", status["active_status"])
-    deleted_notes = db.execute("SELECT * FROM notes WHERE status = ? ORDER BY id DESC ", status["deleted_status"])
-    archived_notes = db.execute("SELECT * FROM notes WHERE status = ? ORDER BY id DESC ", status["archived_status"])
+    all_notes = db.execute("SELECT * FROM notes WHERE user_id = ? ORDER BY id DESC ", session["user_id"])
+    active_notes = db.execute("SELECT * FROM notes WHERE user_id = ? AND status = ? ORDER BY id DESC ", session["user_id"], status["active_status"])
+    deleted_notes = db.execute("SELECT * FROM notes WHERE user_id = ? AND status = ? ORDER BY id DESC ", session["user_id"], status["deleted_status"])
+    archived_notes = db.execute("SELECT * FROM notes WHERE user_id = ? AND status = ? ORDER BY id DESC ", session["user_id"], status["archived_status"])
 
 
     # User reached route via POST
     if request.method == "POST":
 
-        if request.form["action"] == "All notes":
-            return render_template("index.html", notes=all_notes, tags=tags)
+        if request.form['action'] == 'All notes':
+            return render_template('index.html', notes=all_notes, tags=tags, current_username=current_username)
         
-        elif request.form["action"] == "Active":
-            return render_template("index.html", notes=active_notes, tags=tags)
+        elif request.form['action'] == 'Active':
+            return render_template('index.html', notes=active_notes, tags=tags, current_username=current_username)
 
-        elif request.form["action"] == "Archive":
-            return render_template("index.html", notes=archived_notes, tags=tags)
+        elif request.form['action'] == 'Archive':
+            return render_template('index.html', notes=archived_notes, tags=tags, current_username=current_username)
 
-        elif request.form["action"] == "Trash bin":
-            return render_template("index.html", notes=deleted_notes, tags=tags)
+        elif request.form['action'] == 'Trash bin':
+            return render_template('index.html', notes=deleted_notes, tags=tags, current_username=current_username)
 
-        elif request.form['action'] == "New note":
-            return render_template("index.html", notes=active_notes, tags=tags)
+        elif request.form['action'] == 'New note':
+            return render_template('index.html', notes=active_notes, tags=tags, current_username=current_username)
 
         elif request.form['action'] == 'Edit':
-            note = db.execute("SELECT id, title, tag, description FROM notes WHERE id = ?", id)
+            note = db.execute("SELECT id, title, tag, description, user_id FROM notes WHERE id = ? AND user_id = ?", id, session["user_id"])
 
             textarea = note[0]["description"]
             title = note[0]["title"]
             tag = note[0]["tag"]
             id = note[0]["id"]
 
-            return render_template("index.html", id=id, notes=active_notes, tag=tag, tags=tags, title=title, textarea=textarea)
+            return render_template("index.html", id=id, notes=active_notes, tag=tag, tags=tags, title=title, textarea=textarea, current_username=current_username)
 
         elif request.form['action'] == 'Delete':
-            db.execute("UPDATE notes SET status = ? WHERE id = ?", status["deleted_status"], id)
+            db.execute("UPDATE notes SET status = ? WHERE id = ? AND user_id = ?", status["deleted_status"], id, session["user_id"])
             return redirect("/")
         
         elif request.form['action'] == 'Delete Note':
             current_id = request.form.get("current-note-id")
             
             if current_id:
-                db.execute("UPDATE notes SET status = ? WHERE id = ?", status["deleted_status"], current_id)
+                db.execute("UPDATE notes SET status = ? WHERE id = ? AND user_id = ?", status["deleted_status"], current_id, session["user_id"])
                 return redirect("/")
             
             return redirect("/")
@@ -97,7 +101,7 @@ def index():
             current_id = request.form.get("current-note-id")
             
             if current_id:
-                db.execute("UPDATE notes SET status = ? WHERE id = ?", status["archived_status"], current_id)
+                db.execute("UPDATE notes SET status = ? WHERE id = ? AND user_id = ?", status["archived_status"], current_id, session["user_id"])
                 return redirect("/")
             
             return redirect("/")        
@@ -110,7 +114,7 @@ def index():
             current_id = request.form.get("current-note-id")
 
             if current_id:
-                current_note = db.execute("SELECT * FROM notes WHERE id = ?", current_id)[0]
+                current_note = db.execute("SELECT * FROM notes WHERE id = ? AND user_id = ?", current_id, session["user_id"])[0]
 
                 if not title:
                     title = current_note["title"]
@@ -121,23 +125,67 @@ def index():
 
                 print(text)
                 
-                db.execute("UPDATE notes SET title = ?, description = ?, tag = ?, status = ?, date = CURRENT_TIMESTAMP WHERE id = ?", title, text, tag, status["active_status"], current_id)
+                db.execute("UPDATE notes SET title = ?, description = ?, tag = ?, status = ?, date = CURRENT_TIMESTAMP WHERE id = ? and user_id = ?", title, text, tag, status["active_status"], current_id, session["user_id"])
             else:     
-                db.execute("INSERT INTO notes (title, description, tag, status) VALUES (?, ?, ?, ?)", title, text, tag, status["active_status"])
+                db.execute("INSERT INTO notes (title, description, tag, status, user_id) VALUES (?, ?, ?, ?, ?)", title, text, tag, status["active_status"], session["user_id"])
             
             return redirect("/")
 
         elif request.form['action'] == '+':
 
             text =" "
-            return render_template("index.html", textarea=text, notes=active_notes, tags=tags)
+            return render_template("index.html", textarea=text, notes=active_notes, tags=tags, current_username=current_username)
 
         else:
-            return render_template("index.html", notes=active_notes, tags=tags)
+            return render_template("index.html", notes=active_notes, tags=tags, current_username=current_username)
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
-        return render_template("index.html", notes=active_notes, tags=tags)
+        return render_template("index.html", notes=active_notes, tags=tags, current_username=current_username)
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    """Log user in"""
+
+    # Forget any user_id
+    session.clear()
+
+    # User reached route via POST (as by submitting a form via POST)
+    if request.method == "POST":
+
+        # Ensure username was submitted
+        if not request.form.get("email"):
+            flash("Must provide email")
+            return render_template("login.html")
+
+        # Ensure password was submitted
+        elif not request.form.get("password"):
+            flash("Must provide password")
+            return render_template("login.html")
+        
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        # Query database for username
+        rows = db.execute("SELECT * FROM users WHERE email = ?",
+                          email)
+        
+                # Ensure username exists and password is correct
+        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], password):
+            flash("invalid username and/or password")
+            return render_template("login.html")
+
+        # Remember which user has logged in
+        session["user_id"] = rows[0]["id"]
+
+        # Redirect user to home page
+        flash("You are successfuly logged in!")
+        return redirect("/")
+
+    # User reached route via GET (as by clicking a link or via redirect)
+    else:
+        return render_template("login.html")
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -201,7 +249,15 @@ def register():
     else:
         return render_template("register.html", title=title)
 
+@app.route("/logout")
+def logout():
+    """Log user out"""
 
+    # Forget any user_id
+    session.clear()
+
+    # Redirect user to login form
+    return render_template("login.html")
 
 if __name__ == "__main__":
     app.run(debug=True, host="192.168.1.75")
