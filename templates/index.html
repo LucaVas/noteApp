@@ -7,7 +7,15 @@ Note taking app
 {% block body %}
 
     <nav class="navbar">
-        <div class="nav_views">
+        <button class="burger-menu" aria-controls="primary-navigation" aria-expanded="false">
+            <svg class="hamburger" viewBox="-10 -10 120 120" width="30">
+                <path stroke-width="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round" 
+                d="m 20 40 h 60 a 1 1 0 0 1 0 20 h -60 a 1 1 0 0 1 0 -40 h 30 v 70" class="line"></path>
+            </svg>
+        </button>
+        <div class="nav_views" id="primary-navigation">
             <div class="views_top">
                 <h3>Views</h3>
             </div>
@@ -82,8 +90,8 @@ Note taking app
                         placeholder="{{ tag }}" type="text"></div>
                 <nav class="note-text-nav">
                     <ul>
-                        <li class="dropdown">
-                            <!-- <button class="note-section-btn" type="submit">Editor -->
+                        <!-- <li class="dropdown">
+                            <button class="note-section-btn" type="submit">Editor
                                 <i class="fa fa-caret-down"></i>
                             </button>
                             <div class="dropdown-content">
@@ -91,7 +99,7 @@ Note taking app
                                 <input type="text" value="Edit two">
                                 <input type="text" value="Edit three">
                             </div>                        
-                        </li>
+                        </li> -->
                         <li class="text-editor-btn"><img src="/static/images/Icons/bold_icon.png" alt="bold icon" id="bold-icon"></li>
                         <li class="text-editor-btn"><img src="/static/images/Icons/italic_icon.png" alt="italic icon" id="italic-icon"></li>
                         <li class="text-editor-btn"><img src="/static/images/Icons/strikethrough_icon.png" alt="strikethrough icon" id="strikethrough-icon"></li>

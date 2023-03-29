@@ -6,6 +6,23 @@
     .note-text-textarea {
         display: none;
     }
+
+    #note-title {
+        display: none;
+    }
+
+    #changes-alert,
+    #note-tag,
+    #note-tag-before,
+    #note-tag-before::before,
+    #bold-icon,
+    #italic-icon,
+    #strikethrough-icon,
+    #underline-icon
+     {
+        display: none;
+    }
+
 }
 
 @media (width >=1081px) {
@@ -89,7 +106,7 @@
 
     /* Dropdown */
 
-    .dropdown {
+    /* .dropdown {
         position: relative;
         display: inline-block;
     }
@@ -129,7 +146,7 @@
     .dropdown:hover .note-section-btn {
         background-color: var(--accent-color);
         color: var(--main-bg-color);
-    }
+    } */
 
     .text-editor-btn {
         width: 2rem;

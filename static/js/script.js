@@ -197,4 +197,16 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector("#strikethrough-icon").onclick = makeStrikedthrough;
     document.querySelector("#underline-icon").onclick = makeUnderlined;
 
+    const burgerMenu = document.querySelector('.burger-menu');
+    burgerMenu.addEventListener('click', () => {
+        const isOpened = burgerMenu.getAttribute('aria-expanded');
+
+        if (isOpened == 'false') {
+            burgerMenu.setAttribute('aria-expanded', 'true')
+            document.querySelector('#primary-navigation').style.display = 'absolute';
+        } else {
+            burgerMenu.setAttribute('aria-expanded', 'false')
+        }
+    });
+
 });
