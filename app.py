@@ -71,8 +71,8 @@ def index():
         elif request.form['action'] == 'Trash bin':
             return render_template('index.html', notes=deleted_notes, tags=tags, current_username=current_username)
 
-        elif request.form['action'] == 'New note':
-            return render_template('index.html', notes=active_notes, tags=tags, current_username=current_username)
+        # elif request.form['action'] == 'New note':
+        #     return render_template('index.html', notes=active_notes, tags=tags, current_username=current_username)
 
         elif request.form['action'] == 'Edit':
             note = db.execute("SELECT id, title, tag, description, user_id FROM notes WHERE id = ? AND user_id = ?", id, session["user_id"])
@@ -248,6 +248,7 @@ def register():
     # User reached route via GET (as by clicking a link or via redirect)
     else:
         return render_template("register.html", title=title)
+
 
 @app.route("/logout")
 def logout():

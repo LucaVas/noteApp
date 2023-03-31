@@ -209,4 +209,18 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    const newNavNoteBtn = document.querySelector(".nav-new-note");
+    newNavNoteBtn.addEventListener('click', () => {
+        const textArea = document.querySelector(".note-text");
+        const isHidden = textArea.style.display;
+        console.log(isHidden)
+        
+        if (isHidden == 'none') {
+            document.querySelector(".note-text").style.display = 'block'
+        } else{
+            document.querySelector(".note-text").style.display = 'none'
+        }
+        
+    });
+
 });
