@@ -65,12 +65,65 @@
     /* burger menu style and animation END */
 
 
-
-
     /* VIEWS PART STARTS */
     #primary-navigation {
+        width: 80vw;
+        height: max-content;
+        position: absolute;
+        top: 7svh;
+        left: 1rem;
         display: none;
+        flex-direction: column;
+        background: var(--secondary-bg-color);
+        justify-content: space-around;
+        box-shadow: 1px 1px 1rem black;
+        opacity: 1;
+        z-index: 1000;
     }
+
+    .views_top {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        padding: 0 1rem;
+        align-items: center;
+    }
+
+    .views_top button {
+        background-color: var(--main-bg-color);
+    }
+
+    .views_nav {
+        flex: 4;
+    }
+
+    .views_nav ul form {
+        height: 100%;
+        /* border: 1px solid green; */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-view-item {
+        /* border: 1px solid black; */
+        background-color: var(--secondary-bg-color);
+        border: none;
+        width: 100%;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        padding-left: 1rem;
+        transition: all 0.3s ease-out;
+    }
+
+    .nav-view-item:hover {
+        background-color: var(--text-color);
+        color: black;
+    }
+
 
     .nav_tags {
         display: none;

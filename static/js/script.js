@@ -203,9 +203,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (isOpened == 'false') {
             burgerMenu.setAttribute('aria-expanded', 'true')
-            document.querySelector('#primary-navigation').style.display = 'absolute';
+            document.querySelector('#primary-navigation').style.display = 'flex';
+            document.querySelector(".scroll_bar").style.opacity = 0.5;
         } else {
             burgerMenu.setAttribute('aria-expanded', 'false')
+            document.querySelector('#primary-navigation').style.display = 'none';
+            document.querySelector(".scroll_bar").style.opacity = 1;
         }
     });
 
