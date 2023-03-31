@@ -71,8 +71,20 @@ def index():
         elif request.form['action'] == 'Trash bin':
             return render_template('index.html', notes=deleted_notes, tags=tags, current_username=current_username)
 
-        # elif request.form['action'] == 'New note':
-        #     return render_template('index.html', notes=active_notes, tags=tags, current_username=current_username)
+        elif request.form['action'] == 'New note':
+            return render_template('index.html', notes=active_notes, tags=tags, current_username=current_username)
+        
+        elif request.form['action'] == 'Empty note':
+            
+            return render_template('index.html', notes=active_notes, tags=tags, current_username=current_username)
+            
+            # title = 'Empty Note'
+            # tag = 'emptynote'
+            # text = ''
+
+            # db.execute("INSERT INTO notes (title, description, tag, status, user_id) VALUES (?, ?, ?, ?, ?)", title, text, tag, status["active_status"], session["user_id"])
+            
+            # return redirect("/")
 
         elif request.form['action'] == 'Edit':
             note = db.execute("SELECT id, title, tag, description, user_id FROM notes WHERE id = ? AND user_id = ?", id, session["user_id"])
@@ -122,8 +134,6 @@ def index():
                     tag = current_note["tag"]
                 if not text:
                     text = current_note["description"]
-
-                print(text)
                 
                 db.execute("UPDATE notes SET title = ?, description = ?, tag = ?, status = ?, date = CURRENT_TIMESTAMP WHERE id = ? and user_id = ?", title, text, tag, status["active_status"], current_id, session["user_id"])
             else:     

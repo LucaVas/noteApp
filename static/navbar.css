@@ -17,14 +17,17 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-around;
     }
 
-    .nav-new-note {
-        margin-left: 2rem;
+    .nav-new-note,
+    .nav-open-note {
         background: var(--accent-color);
         color: var(--main-bg-color);
-        width: 4rem;
+        height: 2rem;
+        width: 5rem;
+        outline: none;
+        border: none;
     }
 
     /* burger menu style and animation START */
@@ -35,7 +38,6 @@
         border: 0.5px solid var(--text-color);
         height: 2rem;
         overflow: hidden;
-        margin-right: 2rem;
     }
 
     .hamburger {
@@ -144,7 +146,8 @@
         display: none;
     }
 
-    .nav-new-note {
+    .nav-new-note,
+    .nav-open-note {
         display: none;
     }
 
@@ -262,7 +265,8 @@
         display: none;
     }
 
-    .nav-new-note {
+    .nav-new-note,
+    .nav-open-note {
         display: none;
     }
 

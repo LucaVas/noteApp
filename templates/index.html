@@ -7,7 +7,8 @@ Note taking app
 {% block body %}
 
     <nav class="navbar">
-        <button class="nav-new-note">New note</button>
+        <button class="nav-open-note">Open</button>
+        <form action="/" method="post" style="display: inline-block;"><input type="submit" name="action" value="Empty note" class="nav-new-note"></form>
         <button class="burger-menu" aria-controls="primary-navigation" aria-expanded="false">
             <svg class="hamburger" viewBox="-10 -10 120 120" width="30">
                 <path stroke-width="10"
@@ -60,7 +61,7 @@ Note taking app
             {% for note in notes %}
             <div class="notes">
                 <form action="/" method="post" class="scroll-bar-note-header">
-                    <input name="note-id" type="hidden" value="{{ note.id }}">
+                    <input name="note-id" type="text" value="{{ note.id }}" id="scroll-bar-note-id">
                     <input name="note-tag-hidden" type="hidden" value="{{ note.tag }}">
                     <input name="note-status" type="hidden" value="{{ note.status }}">
                     <input type="submit" name="action" value="Edit" id="scroll-bar-note-edit-icon">
@@ -91,16 +92,6 @@ Note taking app
                         placeholder="{{ tag }}" type="text"></div>
                 <nav class="note-text-nav">
                     <ul>
-                        <!-- <li class="dropdown">
-                            <button class="note-section-btn" type="submit">Editor
-                                <i class="fa fa-caret-down"></i>
-                            </button>
-                            <div class="dropdown-content">
-                                <input type="text" value="Edit one">
-                                <input type="text" value="Edit two">
-                                <input type="text" value="Edit three">
-                            </div>                        
-                        </li> -->
                         <li class="text-editor-btn"><img src="/static/images/Icons/bold_icon.png" alt="bold icon" id="bold-icon"></li>
                         <li class="text-editor-btn"><img src="/static/images/Icons/italic_icon.png" alt="italic icon" id="italic-icon"></li>
                         <li class="text-editor-btn"><img src="/static/images/Icons/strikethrough_icon.png" alt="strikethrough icon" id="strikethrough-icon"></li>

@@ -44,6 +44,8 @@ function filterNotesByTag(e) {
 };
 
 function filterByInput(e) {
+    
+    const notes = document.querySelectorAll('.notes');
     filter = e.target.value.toLowerCase();
 
     // make all notes visible
@@ -151,6 +153,32 @@ function makeUnderlined(e) {
     e.preventDefault();
 }
 
+function openNote(e) {
+
+    const textArea = document.querySelector(".note-text")
+    let noteId = document.querySelector("#current-note-id").value;
+
+
+    if (!textArea.style.display || textArea.style.display == 'none') {
+        document.querySelector(".note-text").style.display = 'block'
+
+        if (!noteId) {
+            e.target.innerHTML = `Close: NEW`
+        } else {
+            e.target.innerHTML = `Close: ${noteId}`
+        }
+    } else{
+        document.querySelector(".note-text").style.display = 'none'
+        if (!noteId) {
+            e.target.innerHTML = `Open: NEW`
+        } else {
+            e.target.innerHTML = `Open: ${noteId}`
+        }
+    } 
+}
+
+
+
 document.addEventListener("DOMContentLoaded", function() {
     const notes = document.querySelectorAll('.notes');
     const tags = document.querySelectorAll(".nav-tag-item");
@@ -211,19 +239,19 @@ document.addEventListener("DOMContentLoaded", function() {
             document.querySelector(".scroll_bar").style.opacity = 1;
         }
     });
+    
+    const navOpenBtn = document.querySelector(".nav-open-note");
+    const noteId = document.querySelector("#current-note-id").value;
 
-    const newNavNoteBtn = document.querySelector(".nav-new-note");
-    newNavNoteBtn.addEventListener('click', () => {
-        const textArea = document.querySelector(".note-text");
-        const isHidden = textArea.style.display;
-        console.log(isHidden)
-        
-        if (isHidden == 'none') {
-            document.querySelector(".note-text").style.display = 'block'
-        } else{
-            document.querySelector(".note-text").style.display = 'none'
-        }
-        
-    });
+    if (!noteId) {
+        navOpenBtn.innerHTML = `Open: NEW`
+    } else {
+        navOpenBtn.innerHTML = `Open: ${noteId}`
+    }
+
+    navOpenBtn.onclick = openNote;
+
+    
+    
 
 });
