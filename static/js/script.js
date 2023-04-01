@@ -112,6 +112,7 @@ function removeButtonsFromDeletedNotes() {
         if (notes[i].firstElementChild.childNodes[5].value === "deleted") {
             notes[i].querySelector(".delete-note-btn").style.display = "none";
             notes[i].querySelector("#scroll-bar-note-edit-icon").style.display = "none";
+            notes[i].querySelector("#mobile-scroll-bar-note-edit-icon").style.display = "none";
         }
     }
 }
