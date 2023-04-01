@@ -103,12 +103,21 @@
         gap: 1rem;
     }
 
-    #scroll-bar-note-edit-icon,
     #scroll-bar-note-delete-icon,
+    #mobile-scroll-bar-note-edit-icon,
     #scroll-bar-note-id {
         width: 3rem;
+        height: 1.5rem;
         background-color: var(--secondary-bg-color);
         text-align: center;
+    }
+
+    #mobile-scroll-bar-note-edit-icon {
+        border: 1px solid var(--text-color);
+    }
+
+    #scroll-bar-note-edit-icon {
+        display: none;
     }
 
     #scroll-bar-note-id {
@@ -252,11 +261,15 @@
         justify-content: end;
     }
 
-    #scroll-bar-note-edit-icon,
-    #scroll-bar-note-delete-icon {
+    #scroll-bar-note-delete-icon,
+    #mobile-scroll-bar-note-edit-icon {
         width: 3rem;
         background-color: var(--secondary-bg-color);
         margin-left: 2rem;
+    }
+
+    #scroll-bar-note-edit-icon {
+        display: none;
     }
 
 
@@ -402,6 +415,10 @@
         width: 3rem;
         background-color: var(--secondary-bg-color);
         margin-left: 2rem;
+    }
+
+    #mobile-scroll-bar-note-edit-icon {
+        display: none;
     }
 
 

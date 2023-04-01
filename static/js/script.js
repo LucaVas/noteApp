@@ -177,6 +177,35 @@ function openNote(e) {
     } 
 }
 
+function editNote(e) {
+    const note = e.target.parentElement.parentElement;
+    const scrollId = note.querySelector("#scroll-bar-note-id").value
+    const scrollTitle = note.querySelector(".scroll-bar-note-title").innerHTML
+    const scrollText = note.querySelector(".scroll-bar-note-description").innerHTML
+    const scrollTag = note.querySelector(".scroll-bar-note-tag").innerHTML
+    
+    const id = document.querySelector("#current-note-id")
+    const title = document.querySelector("#note-title")
+    const tag = document.querySelector("#note-tag")
+    const textValue = document.querySelector("#note-text-bottom-hidden")
+    const textContent = document.querySelector(".note-text_bottom")
+
+    id.setAttribute("value", scrollId)
+    title.setAttribute("placeholder", scrollTitle)
+    tag.setAttribute("placeholder", scrollTag)
+    textValue.setAttribute("value", scrollText)
+    textContent.innerHTML = scrollText
+
+    footerButtons = document.querySelectorAll(".note-section-footer-btn");
+    footerButtons.forEach(element => {
+        element.disabled = false;
+        element.style.backgroundColor = "rgb(232, 197, 71)";
+    });
+    
+    openNote()
+
+}
+
 function closeNote() {
     document.querySelector(".note-text").style.display = 'none'
 }
@@ -276,16 +305,12 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
     
-    const navOpenBtn = document.querySelector(".nav-open-note");
-    const noteId = document.querySelector("#current-note-id").value;
-
-    if (!noteId) {
-        navOpenBtn.innerHTML = `Open: NEW`
-    } else {
-        navOpenBtn.innerHTML = `Open: ${noteId}`
-    }
-
-    navOpenBtn.onclick = openNote;
+    
+    const mobileEditNoteBtns = document.querySelectorAll("#mobile-scroll-bar-note-edit-icon")
+    mobileEditNoteBtns.forEach(element => {
+        element.addEventListener("click", editNote);
+    });
+     
 
     // button which opens a new note (mobile & tablet)
     const navNewNote = document.querySelector(".nav-new-note");

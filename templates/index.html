@@ -7,7 +7,6 @@ Note taking app
 {% block body %}
 
     <nav class="navbar">
-        <button class="nav-open-note">Open</button>
         <button class="nav-new-note">New note</button>
         <button class="burger-menu" aria-controls="primary-navigation" aria-expanded="false">
             <svg class="hamburger" viewBox="-10 -10 120 120" width="30">
@@ -64,6 +63,7 @@ Note taking app
                     <input name="note-id" type="text" value="{{ note.id }}" id="scroll-bar-note-id">
                     <input name="note-tag-hidden" type="hidden" value="{{ note.tag }}">
                     <input name="note-status" type="hidden" value="{{ note.status }}">
+                    <button type="button" id="mobile-scroll-bar-note-edit-icon">Edit</button>
                     <input type="submit" name="action" value="Edit" id="scroll-bar-note-edit-icon">
                     <input type="submit" name="action" value="Delete" id="scroll-bar-note-delete-icon" class="delete-note-btn">
                 </form>
