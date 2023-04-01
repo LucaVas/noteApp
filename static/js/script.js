@@ -177,6 +177,38 @@ function openNote(e) {
     } 
 }
 
+function eraseNote() {
+    const id = document.querySelector("#current-note-id")
+    const title = document.querySelector("#note-title")
+    const tag = document.querySelector("#note-tag")
+    const textValue = document.querySelector("#note-text-bottom-hidden")
+    const textContent = document.querySelector(".note-text_bottom")
+
+    console.log(textContent)
+
+    id.setAttribute("value", "")
+    title.setAttribute("placeholder", "")
+    tag.setAttribute("placeholder", "")
+    textValue.setAttribute("value", "")
+    if (textContent.firstElementChild) {
+        textContent.removeChild(textContent.firstElementChild);
+    }
+    
+}
+
+function createNewNote() {
+
+    eraseNote()
+    const textArea = document.querySelector(".note-text")
+
+    if (!textArea.style.display || textArea.style.display == 'none') {
+        document.querySelector(".note-text").style.display = 'block'
+    } else{
+        document.querySelector(".note-text").style.display = 'none'
+    } 
+
+}
+
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -251,7 +283,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     navOpenBtn.onclick = openNote;
 
-    
+    // button which opens a new note (mobile & tablet)
+    const navNewNote = document.querySelector(".nav-new-note")
+    navNewNote.addEventListener("click", createNewNote)    
     
 
 });
