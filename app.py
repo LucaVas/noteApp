@@ -268,6 +268,7 @@ def logout():
     session.clear()
 
     # Redirect user to login form
+    flash("You are now logged out!")
     return render_template("login.html")
 
 if __name__ == "__main__":

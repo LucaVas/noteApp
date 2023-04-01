@@ -232,11 +232,9 @@ function createNewNote() {
 
 }
 
-function removeFlash() {
-  const element = document.querySelector(".flash_alert");
-  element.remove();
+function removeFlash(flash) {
+    flash.parentElement.remove()
 }
-
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -317,9 +315,5 @@ document.addEventListener("DOMContentLoaded", function() {
     // button which closes the new note (mobile & table)
     const closeNoteBtn = document.querySelector("#close-note");
     closeNoteBtn.addEventListener("click", closeNote);
-
-    // button which removes flashing message
-    const removeFlashBtn = document.querySelector("#remove-flash-btn")
-    removeFlashBtn.addEventListener("click", removeFlash)
 
 });

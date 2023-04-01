@@ -55,28 +55,31 @@ header {
     position: absolute;
     height: auto;
     width: 100vw;
+    
 }
 
-.flash_alert {
+#flash_alert {
     all: unset;
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0;
+    margin: 0rem;
     height: 3rem;
     width: 100vw;
     color: var(--main-bg-color);
-    font-weight: bold;
-    background-color: var(--accent-color);
+    font-weight: bold; 
     z-index: 1;
+    background-color: var(--accent-color);
 }
 
 #remove-flash-btn {
+    position: absolute;
     width: 2rem;
     height: 1.5rem;
     border: 1px solid black;
     background-color: transparent;
+    right: 5%;
 }
 
 @media (width <=650px) {
