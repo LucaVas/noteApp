@@ -304,7 +304,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // button which opens a new note (mobile & tablet)
     const navNewNote = document.querySelector(".nav-new-note");
-    navNewNote.addEventListener("click", createNewNote);    
+    const tabletNewNote = document.querySelector(".tablet-nav-new-note")
+    navNewNote.addEventListener("click", createNewNote);  
+    tabletNewNote.addEventListener("click", createNewNote);  
+
     
     // button which closes the new note (mobile & table)
     const closeNoteBtn = document.querySelector("#close-note");

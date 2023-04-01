@@ -57,7 +57,7 @@
         background-color: var(--secondary-bg-color);
     }
 
-    .scroll_top h4 {
+    .options-container {
         display: flex;
         background-color: var(--secondary-bg-color);
         padding-left: 1rem;
@@ -67,7 +67,10 @@
         grid-column: 1 / 4;
         align-items: center;
         height: 100%;
+    }
 
+    .tablet-nav-new-note {
+        display: none;
     }
 
     /* TOP PART ENDS */
@@ -170,10 +173,17 @@
 
     /* CENTER SCROLL BAR STARTS */
     /* TOP PART STARTS */
+    
+    /* .scroll_bar {
+        display: none;
+    } */
+    
     .scroll_bar {
         border-right: 1px solid black;
         background-color: var(--main-bg-color);
-        height: 100%;
+        height: 100svh;
+        opacity: 1;
+        flex: 3;
     }
 
     .scroll_top {
@@ -181,13 +191,22 @@
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
         padding-top: 1rem;
-        height: 20svh;
+        height: 25%;
     }
 
     .scroll_top h3 {
         grid-row: 1;
         grid-column: 1 / 3;
         margin-left: 1rem;
+    }
+
+    .tablet-nav-new-note {
+        background: var(--accent-color);
+        color: var(--main-bg-color);
+        height: 2rem;
+        width: 5rem;
+        outline: none;
+        border: none;
     }
 
     .scroll_top form {
@@ -198,32 +217,29 @@
     }
 
     #add-note-btn {
-        width: 5rem;
-        height: 2rem;
-        background-color: var(--accent-color);
-        color: var(--main-bg-color);
-        border: 1px solid var(--main-bg-color);
+        display: none;
     }
 
     #input-search {
         padding: 0 0.5rem;
         grid-row: 2;
         grid-column: 1 / 4;
-        margin: 0 1rem;
+        margin: 1rem 1rem 0rem 1rem;
         height: 2rem;
         margin-bottom: 1rem;
         background-color: var(--secondary-bg-color);
     }
 
-    .scroll_top h4 {
+    .options-container {
         display: flex;
         background-color: var(--secondary-bg-color);
-        padding-left: 1rem;
+        padding: 0rem 2rem;
         margin-bottom: 1rem;
         border-bottom: 1px solid black;
         grid-row: 3;
         grid-column: 1 / 4;
         align-items: center;
+        justify-content: space-between;
         height: 100%;
 
     }
@@ -235,7 +251,7 @@
         padding-top: 1rem;
         display: flex;
         flex-direction: column;
-        height: 80svh;
+        height: 75%;
         overflow: scroll;
         -ms-overflow-style: none;
         scrollbar-width: none;
@@ -247,7 +263,6 @@
 
     .notes {
         min-height: 8rem;
-        width: 100%;
         border-bottom: 1px solid black;
         display: flex;
         flex-direction: column;
@@ -259,17 +274,28 @@
         display: flex;
         align-items: center;
         justify-content: end;
+        gap: 1rem;
     }
 
     #scroll-bar-note-delete-icon,
-    #mobile-scroll-bar-note-edit-icon {
+    #mobile-scroll-bar-note-edit-icon,
+    #scroll-bar-note-id {
         width: 3rem;
+        height: 1.5rem;
         background-color: var(--secondary-bg-color);
-        margin-left: 2rem;
+        text-align: center;
+    }
+
+    #mobile-scroll-bar-note-edit-icon {
+        border: 1px solid var(--text-color);
     }
 
     #scroll-bar-note-edit-icon {
         display: none;
+    }
+
+    #scroll-bar-note-id {
+        border: 1px solid transparent;
     }
 
 
@@ -293,7 +319,7 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         height: fit-content;
-        width: 25rem;
+        max-width: 25rem;
     }
 
     .scroll-bar-note-tag::before {
@@ -328,9 +354,10 @@
     .scroll_top {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
         padding-top: 1rem;
         height: 20svh;
+        border-bottom: 1px solid black;
     }
 
     .scroll_top h3 {
@@ -364,17 +391,8 @@
         background-color: var(--secondary-bg-color);
     }
 
-    .scroll_top h4 {
-        display: flex;
-        background-color: var(--secondary-bg-color);
-        padding-left: 1rem;
-        margin-bottom: 1rem;
-        border-bottom: 1px solid black;
-        grid-row: 3;
-        grid-column: 1 / 4;
-        align-items: center;
-        height: 100%;
-
+    .options-container {
+        display: none;
     }
 
     /* TOP PART ENDS */
@@ -410,15 +428,23 @@
         justify-content: end;
     }
 
+    
+
     #scroll-bar-note-edit-icon,
-    #scroll-bar-note-delete-icon {
+    #scroll-bar-note-delete-icon,
+    #scroll-bar-note-id {
         width: 3rem;
         background-color: var(--secondary-bg-color);
         margin-left: 2rem;
+        text-align: center;
     }
 
     #mobile-scroll-bar-note-edit-icon {
         display: none;
+    }
+
+    #scroll-bar-note-id {
+        border: 1px solid transparent;
     }
 
 
@@ -460,4 +486,7 @@
         font-size: 0.7rem;
     }
 
+    #close-note {
+        display: none;
+    }
 }

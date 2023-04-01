@@ -140,6 +140,7 @@
         padding: 1rem 0;
         background-color: var(--secondary-bg-color);
         height: 100svh;
+        flex: 1;
     }
 
     .burger-menu {
