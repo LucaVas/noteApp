@@ -153,27 +153,15 @@ function makeUnderlined(e) {
     e.preventDefault();
 }
 
-function openNote(e) {
+function openNote() {
 
     const textArea = document.querySelector(".note-text")
-    let noteId = document.querySelector("#current-note-id").value;
 
 
     if (!textArea.style.display || textArea.style.display == 'none') {
         document.querySelector(".note-text").style.display = 'block'
-
-        if (!noteId) {
-            e.target.innerHTML = `Close: NEW`
-        } else {
-            e.target.innerHTML = `Close: ${noteId}`
-        }
     } else{
         document.querySelector(".note-text").style.display = 'none'
-        if (!noteId) {
-            e.target.innerHTML = `Open: NEW`
-        } else {
-            e.target.innerHTML = `Open: ${noteId}`
-        }
     } 
 }
 
@@ -184,6 +172,8 @@ function editNote(e) {
     const scrollText = note.querySelector(".scroll-bar-note-description").innerHTML
     const scrollTag = note.querySelector(".scroll-bar-note-tag").innerHTML
     
+    eraseNote()
+        
     const id = document.querySelector("#current-note-id")
     const title = document.querySelector("#note-title")
     const tag = document.querySelector("#note-tag")
@@ -194,6 +184,7 @@ function editNote(e) {
     title.setAttribute("placeholder", scrollTitle)
     tag.setAttribute("placeholder", scrollTag)
     textValue.setAttribute("value", scrollText)
+    
     textContent.innerHTML = scrollText
 
     footerButtons = document.querySelectorAll(".note-section-footer-btn");
@@ -201,7 +192,7 @@ function editNote(e) {
         element.disabled = false;
         element.style.backgroundColor = "rgb(232, 197, 71)";
     });
-    
+
     openNote()
 
 }
@@ -217,15 +208,14 @@ function eraseNote() {
     const textValue = document.querySelector("#note-text-bottom-hidden")
     const textContent = document.querySelector(".note-text_bottom")
 
-    console.log(textContent)
-
     id.setAttribute("value", "")
     title.setAttribute("placeholder", "")
     tag.setAttribute("placeholder", "")
     textValue.setAttribute("value", "")
     if (textContent.firstElementChild) {
         textContent.removeChild(textContent.firstElementChild);
-    }
+    } 
+    textContent.innerHTML = ""
     
 }
 
