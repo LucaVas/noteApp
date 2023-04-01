@@ -28,6 +28,7 @@
         <header>
             <div class="flash_alert">
                 {{ get_flashed_messages() | join(" ") }}
+                <input type="button" value="X" id="remove-flash-btn">
             </div>
         </header>
         {% endif %}
