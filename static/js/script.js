@@ -177,6 +177,10 @@ function openNote(e) {
     } 
 }
 
+function closeNote() {
+    document.querySelector(".note-text").style.display = 'none'
+}
+
 function eraseNote() {
     const id = document.querySelector("#current-note-id")
     const title = document.querySelector("#note-title")
@@ -284,8 +288,11 @@ document.addEventListener("DOMContentLoaded", function() {
     navOpenBtn.onclick = openNote;
 
     // button which opens a new note (mobile & tablet)
-    const navNewNote = document.querySelector(".nav-new-note")
-    navNewNote.addEventListener("click", createNewNote)    
+    const navNewNote = document.querySelector(".nav-new-note");
+    navNewNote.addEventListener("click", createNewNote);    
     
+    // button which closes the new note (mobile & table)
+    const closeNoteBtn = document.querySelector("#close-note");
+    closeNoteBtn.addEventListener("click", closeNote);
 
 });

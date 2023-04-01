@@ -197,6 +197,13 @@
         border: 1px solid var(--main-bg-color);
     }
 
+    #close-note {
+        width: 3rem;
+        background: var(--accent-color);
+        color: var(--main-bg-color);
+        margin-left: 80%;
+    }
+
     /* RIGHT SECTION ENDS */
 }
 
@@ -223,6 +230,10 @@
     #strikethrough-icon,
     #underline-icon
      {
+        display: none;
+    }
+
+    .close-note {
         display: none;
     }
 
@@ -409,6 +420,10 @@
         background-color: var(--accent-color);
         color: var(--main-bg-color);
         border: 1px solid var(--main-bg-color);
+    }
+
+    .close-note {
+        display: none;
     }
 
     /* RIGHT SECTION ENDS */
