@@ -1,12 +1,18 @@
 :root {
     --main-bg-color: rgb(31, 2, 22);
     --secondary-bg-color: rgb(40, 9, 31);
-    --text-color: rgb(244, 244, 249);
+    --text-color-light: rgb(244, 244, 249);
+    --text-color-medium: grey;
+    --text-color-dark: black;
     --accent-color: rgb(232, 197, 71);
     --deleted-color: rgba(255, 0, 0, 0.308);
     --archived-color: rgba(232, 197, 71, 0.286);
+    --standard-border-color: black;
+    /* borders */
+    --main-border-radius: 0.3rem;
+    --standard-border-width: 1px;
+    --standard-btn-height: 1.5rem;
 }
-
 
 
 * {
@@ -26,25 +32,32 @@ li {
     list-style: none;
 }
 
-input {
-    border-radius: 0.3rem;
-    border: 1px solid var(--text-color);
+input[type="text"],
+input[type="password"] {
+    border-radius: var(--main-border-radius);
+    border: var(--standard-border-width) solid var(--text-color);
+    padding: 0.5rem;
 }
 
-input:focus {
-    border: none;
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border: var(--standard-border-width) solid red;
 }
+
 
 input[type="submit"] {
     cursor: pointer;
+    border-radius: var(--main-border-radius);
 }
 
 
 button {
     outline: none;
-    border-radius: 0.3rem;
-    border: transparent;
-    height: 2em;
+    border-radius: var(--main-border-radius);
+    background-color: var(--accent-color);
+    color: var(--text-color-dark);
+    border: var(--standard-border-width) solid var(--standard-border-color);
+    height: var(--standard-btn-height);
 }
 
 button:hover {
@@ -54,8 +67,15 @@ button:hover {
 header {
     position: absolute;
     height: auto;
+    width: 100vw;  
+}
+
+.full-height {
+    height: 100svh;
+}
+
+.full-width {
     width: 100vw;
-    
 }
 
 #flash_alert {
@@ -76,7 +96,7 @@ header {
 #remove-flash-btn {
     position: absolute;
     width: 2rem;
-    height: 1.5rem;
+    height: var(--standard-btn-height);
     border: 1px solid black;
     background-color: transparent;
     right: 5%;

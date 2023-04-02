@@ -1,10 +1,17 @@
 :root {
     --main-bg-color: rgb(31, 2, 22);
     --secondary-bg-color: rgb(40, 9, 31);
-    --text-color: rgb(244, 244, 249);
+    --text-color-light: rgb(244, 244, 249);
+    --text-color-medium: grey;
+    --text-color-dark: black;
     --accent-color: rgb(232, 197, 71);
     --deleted-color: rgba(255, 0, 0, 0.308);
     --archived-color: rgba(232, 197, 71, 0.286);
+    --standard-border-color: black;
+    /* borders */
+    --main-border-radius: 0.3rem;
+    --standard-border-width: 1px;
+    --standard-btn-height: 1.5rem;
 }
 
 @media (width <= 1081px) {
@@ -52,7 +59,7 @@
         margin-left: 1rem;
         border: none;
         font-size: 1.5rem;
-        border-bottom: 1px solid var(--text-color);
+        border-bottom: 1px solid var(--text-color-medium);
     }
 
     #changes-alert {
@@ -71,7 +78,8 @@
         padding: 0.5rem;
         background-color: var(--main-bg-color);
         border: none;
-        border-bottom: 1px solid var(--text-color);
+        border-bottom: 1px solid var(--text-color-medium);
+        color: var(--text-color-light);
     }
 
     #note-tag-before {
@@ -80,7 +88,7 @@
 
     #note-tag-before::before {
         content: "# ";
-        color: grey;
+        color: var(--text-color-medium);
     }
 
     .note-text-nav {
@@ -156,7 +164,7 @@
         border-radius: 0.3rem;
         box-shadow: 1px 1px 1px #999;
         border: 1px solid #ccc;
-        color: var(--text-color);
+        color: var(--standard-border-color);
         background-color: var(--secondary-bg-color);
         flex: 6;
         text-align: justify;
@@ -218,7 +226,8 @@
         margin-left: 1rem;
         border: none;
         font-size: 1.5rem;
-        border-bottom: 1px solid var(--text-color);
+        border-bottom: 1px solid var(--text-color-medium);
+        color: var(--text-color-light);
     }
 
     #changes-alert {
@@ -227,6 +236,7 @@
         grid-row: 1;
         margin-right: 1rem;
         font-size: 0.8rem;
+        color: var(--text-color-light);
     }
 
     #note-tag {
@@ -237,7 +247,8 @@
         padding: 0.5rem;
         background-color: var(--main-bg-color);
         border: none;
-        border-bottom: 1px solid var(--text-color);
+        border-bottom: 1px solid var(--text-color-medium);
+        color: var(--text-color-light);
     }
 
     #note-tag-before {
@@ -246,7 +257,7 @@
 
     #note-tag-before::before {
         content: "# ";
-        color: grey;
+        color: var(--text-color-medium);
     }
 
     .note-text-nav {
@@ -292,13 +303,13 @@
 
     .dropdown-content input {
         background-color: var(--main-bg-color);
-        color: vat(--text-color);
+        color: vat(--standard-border-color);
         border: none;
         border-bottom: 1px solid white;
     }
 
     .dropdown-content input:hover {
-        background-color: var(--text-color);
+        background-color: var(--standard-border-color);
         color: var(--main-bg-color);
         cursor: pointer;
     }
@@ -350,7 +361,7 @@
         border-radius: 0.3rem;
         box-shadow: 1px 1px 1px #999;
         border: 1px solid #ccc;
-        color: var(--text-color);
+        color: var(--standard-border-color);
         background-color: var(--secondary-bg-color);
         flex: 6;
         text-align: justify;
