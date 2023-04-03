@@ -4,6 +4,7 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import login_required
+import re
 
 # Configure application
 app = Flask(__name__)
@@ -74,14 +75,6 @@ def index():
         elif request.form['action'] == 'Empty note':
             
             return render_template('index.html', notes=active_notes, tags=tags, current_username=current_username)
-            
-            # title = 'Empty Note'
-            # tag = 'emptynote'
-            # text = ''
-
-            # db.execute("INSERT INTO notes (title, description, tag, status, user_id) VALUES (?, ?, ?, ?, ?)", title, text, tag, status["active_status"], session["user_id"])
-            
-            # return redirect("/")
 
         elif request.form['action'] == 'Edit':
             note = db.execute("SELECT id, title, tag, description, user_id FROM notes WHERE id = ? AND user_id = ?", id, session["user_id"])
@@ -202,7 +195,7 @@ def register():
     session.clear()
 
     title = "Password must contain at least 8 characters, and at least one lowercase, one uppercase, one number and one special character."
-    # regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&-.,])[A-Za-z\d@$!%*?&-.,]{8,}$'
+    regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&-.,])[A-Za-z\d@$!%*?&-.,]{8,}$'
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
@@ -222,8 +215,9 @@ def register():
             return render_template("register.html", title=title)
 
         # Require users’ passwords to have at least 1 upper, 1 lower, 1 number and 1 symbol
-        # if not re.match(regex, request.form.get("password")):
-        #     return apology("password must be at least 8 characters and contain uppercase, lowercase, number and symbol", 400)
+        if not re.match(regex, request.form.get("password")):
+            flash("Password must be at least 8 characters and contain uppercase, lowercase, number and symbol")
+            return render_template("register.html", title=title)
 
 
         username = request.form.get("username")
