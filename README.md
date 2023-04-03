@@ -2,7 +2,7 @@
 ## Web note-taking application
 ### Built in HTML, CSS, JavaScript, Flask and SQL
 
-#### Video Demo:  <URL HERE>
+#### Video Demo:  <https://youtu.be/3WK0WN4prdY>
 
 #### Description:
 NoteApp is a web application built in HTML, vanilla CSS and JavaScript for the front end, and Flask and SQL for the back end. 
