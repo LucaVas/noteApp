@@ -129,7 +129,8 @@
     }
 
     #mobile-scroll-bar-note-edit-icon {
-        border: var(--standard-border-width) solid var(--text-color-light);
+        /* border: var(--standard-border-width) solid var(--text-color-light); */
+        box-shadow: -2px -1.5px 0.5px #545454, 1px 1px 1px black;
         color: var(--text-color-light);
         height: var(--standard-btn-height);
     }
@@ -193,7 +194,6 @@
     .scroll_bar {
         border-right: var(--standard-border-width) solid var(--standard-border-color);
         background-color: var(--main-bg-color);
-        height: 100svh;
         opacity: 1;
         flex: 3;
     }
@@ -380,6 +380,7 @@
         padding-top: 1rem;
         height: 20svh;
         border-bottom: var(--standard-border-width) solid var(--standard-border-color);
+        align-items: center;
     }
 
     .scroll_top h3 {
@@ -398,7 +399,7 @@
 
     #add-note-btn {
         width: 5rem;
-        height: var(--standard-btn-height);
+        height: 2rem;
         background-color: var(--accent-color);
         color: var(--main-bg-color);
         border: var(--standard-border-width) solid var(--standard-border-color);

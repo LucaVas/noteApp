@@ -237,7 +237,6 @@ function removeFlash(flash) {
     flash.parentElement.remove()
 }
 
-
 document.addEventListener("DOMContentLoaded", function() {
     const notes = document.querySelectorAll('.notes');
     const tags = document.querySelectorAll(".nav-tag-item");

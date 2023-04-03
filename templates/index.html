@@ -47,7 +47,7 @@ Note taking app
     </nav>
 
 
-    <div class="scroll_bar">
+    <div class="scroll_bar full-height">
         <div class="scroll_top">
             <h3>All notes</h3>
             <form action="/" method="post">
@@ -87,9 +87,10 @@ Note taking app
         <form action="/" method="post" id="note-text-form">
             <div class="note-section-top">
                 <input autocomplete="off" autofocus id="note-title" name="note-title" placeholder="{{ title }}" type="text">
-                <div id="changes-alert">
+                <div id="current-username">
                     <p>User: {{ current_username }}</p>
-                    <p><a class="nav-link" href="/logout">Log Out</a></p>
+                    <p id="logout-p"><a id="logout-link" class="nav-link" href="/logout">Log Out</a></p>
+                    
                 </div>
                 <div id="note-tag-before"><input autocomplete="off" autofocus id="note-tag" name="note-tag"
                         placeholder="{{ tag }}" type="text"></div>
@@ -99,8 +100,9 @@ Note taking app
                         <li class="text-editor-btn"><img src="/static/images/Icons/italic_icon.png" alt="italic icon" id="italic-icon"></li>
                         <li class="text-editor-btn"><img src="/static/images/Icons/strikethrough_icon.png" alt="strikethrough icon" id="strikethrough-icon"></li>
                         <li class="text-editor-btn"><img src="/static/images/Icons/underline_icon.png" alt="underline icon" id="underline-icon"></li>
-                        <input name="current-note-id" type="hidden" value="{{ id }}" id="current-note-id">
+                        <input name="current-note-id" type="hidden" value="{{ id }}" id="current-note-id"> 
                     </ul>
+                    <button type="button" id="close-note">X</button>
                 </nav>
             </div>
             <div class="note-text-textarea">
@@ -113,7 +115,7 @@ Note taking app
                 </div>
             </div>
         </form>
-        <button id="close-note">X</button>
+        
     </section>
 
 {% endblock %}

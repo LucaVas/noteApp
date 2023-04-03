@@ -38,6 +38,7 @@
     }
 
     /* burger menu style and animation START */
+
     .burger-menu {
         display: inline-block;
         background: transparent;
@@ -89,7 +90,7 @@
         box-shadow: 1px 1px 1rem black;
         opacity: 1;
         z-index: 1000;
-        border-radius: var(--main-border-radius);
+        border-radius: 0.5rem;
     }
 
     .views_top {
@@ -353,6 +354,7 @@
         justify-content: space-between;
         padding: 1rem 1rem;
         transition: all 0.3s ease-out;
+        border-radius: var(--main-border-radius);
     }
 
     .nav-tag-item:hover,

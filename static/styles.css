@@ -35,17 +35,13 @@ li {
 input[type="text"],
 input[type="password"] {
     border-radius: var(--main-border-radius);
-    border: var(--standard-border-width) solid var(--text-color);
     padding: 0.5rem;
-}
-
-input[type="text"]:focus,
-input[type="password"]:focus {
-    border: var(--standard-border-width) solid red;
+    outline: none;
 }
 
 
 input[type="submit"] {
+    outline: none;
     cursor: pointer;
     border-radius: var(--main-border-radius);
 }
@@ -67,7 +63,6 @@ button:hover {
 header {
     position: absolute;
     height: auto;
-    width: 100vw;  
 }
 
 .full-height {
@@ -86,11 +81,11 @@ header {
     justify-content: center;
     margin: 0rem;
     height: 3rem;
-    width: 100vw;
     color: var(--main-bg-color);
     font-weight: bold; 
     z-index: 1;
     background-color: var(--accent-color);
+    width: 100vw;
 }
 
 #remove-flash-btn {

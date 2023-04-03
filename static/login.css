@@ -15,7 +15,6 @@
 
 .login-container {
     margin: 0;
-    padding: 0;
     display: grid;
     place-content: center;
     min-height: 100vh;
@@ -38,13 +37,26 @@
 .login-form-field-div {
     text-align: center;
     width: 100%;
+    border: var(--standard-border-width) solid transparent;
 }
+
 
 .login-form-field {
     width: 80%;
     background-color: var(--archived-color);
+    border: var(--standard-border-width) solid var(--text-color-dark);
+    color: var(--text-color-light);
+}
+
+.login-form-field:focus {
+    border: 1px solid var(--accent-color);
 }
 
 .login-form-btn {
+    height: 2rem;
     width: 6rem;
+}
+
+.login-form-redirect-link {
+    color: var(--text-color-light);
 }

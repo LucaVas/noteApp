@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/static/navbar.css">
     <link rel="stylesheet" href="/static/notes.css">
     <link rel="stylesheet" href="/static/text_section.css">
-    <link rel="stylesheet" href="/static/register.css">
+    <link rel="stylesheet" href="/static/login.css">
 
     <script src="/static/js/script.js" defer></script>
 
@@ -25,7 +25,7 @@
 
 
         {% if get_flashed_messages() %}
-        <header>
+        <header class="full-width">
             <div id="flash_alert">
             {{ get_flashed_messages() | join(" ") }}
             <button type="button" id="remove-flash-btn" onclick=removeFlash(this)>X</button>
